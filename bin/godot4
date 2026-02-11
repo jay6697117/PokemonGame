@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v godot >/dev/null 2>&1; then
+  exec "$(command -v godot)" "$@"
+fi
+
+echo "Error: 'godot' binary not found in PATH." >&2
+exit 1
