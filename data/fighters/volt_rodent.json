@@ -1,0 +1,29 @@
+{
+  "id": "volt_rodent",
+  "name": "Volt Rodent",
+  "element": "electric",
+  "placeholder_asset_id": "fighter_volt_01",
+  "base_stats": {
+    "hp": 1000,
+    "speed": 1.1,
+    "weight": 0.9
+  },
+  "moves": [
+    {
+      "id": "light_jab",
+      "startup_frames": 4,
+      "active_frames": 3,
+      "recovery_frames": 10,
+      "damage": 40,
+      "hitstun_frames": 12
+    },
+    {
+      "id": "heavy_strike",
+      "startup_frames": 9,
+      "active_frames": 4,
+      "recovery_frames": 18,
+      "damage": 90,
+      "hitstun_frames": 20
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "tide_turtle",
+  "name": "Tide Turtle",
+  "element": "water",
+  "placeholder_asset_id": "fighter_tide_01",
+  "base_stats": {
+    "hp": 1080,
+    "speed": 0.9,
+    "weight": 1.2
+  },
+  "moves": [
+    {
+      "id": "shell_poke",
+      "startup_frames": 5,
+      "active_frames": 3,
+      "recovery_frames": 11,
+      "damage": 45,
+      "hitstun_frames": 13
+    },
+    {
+      "id": "tidal_slam",
+      "startup_frames": 10,
+      "active_frames": 4,
+      "recovery_frames": 20,
+      "damage": 95,
+      "hitstun_frames": 22
+    }
+  ]
+}

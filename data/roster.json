@@ -1,0 +1,13 @@
+{
+  "allow_mirror_selection": true,
+  "fighters": [
+    {
+      "id": "volt_rodent",
+      "file": "res://data/fighters/volt_rodent.json"
+    },
+    {
+      "id": "tide_turtle",
+      "file": "res://data/fighters/tide_turtle.json"
+    }
+  ]
+}
