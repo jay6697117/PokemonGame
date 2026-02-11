@@ -1,0 +1,91 @@
+; Engine configuration file.
+; It's best edited using the editor and not directly.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Pokemon KOF Private Prototype"
+run/main_scene="res://scenes/main_menu.tscn"
+run/max_fps=60
+
+[autoload]
+
+GameConfig="*res://scripts/global_config.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[input]
+
+p1_up={
+"deadzone": 0.5,
+"events": []
+}
+p1_down={
+"deadzone": 0.5,
+"events": []
+}
+p1_left={
+"deadzone": 0.5,
+"events": []
+}
+p1_right={
+"deadzone": 0.5,
+"events": []
+}
+p1_light={
+"deadzone": 0.5,
+"events": []
+}
+p1_heavy={
+"deadzone": 0.5,
+"events": []
+}
+p1_guard={
+"deadzone": 0.5,
+"events": []
+}
+p2_up={
+"deadzone": 0.5,
+"events": []
+}
+p2_down={
+"deadzone": 0.5,
+"events": []
+}
+p2_left={
+"deadzone": 0.5,
+"events": []
+}
+p2_right={
+"deadzone": 0.5,
+"events": []
+}
+p2_light={
+"deadzone": 0.5,
+"events": []
+}
+p2_heavy={
+"deadzone": 0.5,
+"events": []
+}
+p2_guard={
+"deadzone": 0.5,
+"events": []
+}
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
