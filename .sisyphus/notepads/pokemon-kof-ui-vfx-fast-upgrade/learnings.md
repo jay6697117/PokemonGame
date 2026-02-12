@@ -5,3 +5,11 @@
 - 2026-02-12: Centralized banner visibility management into `_show_banner` and `_hide_banner` ensures consistent state reset between rounds and matches.
 - 2026-02-12: Deterministic hit-feedback validation is easier when the presentation pipeline exposes explicit counters (`total_hits`, `spark_count`, `flash_count`, `shake_count`, `hit_stop_count`) consumed by QA scripts.
 - 2026-02-12: Camera-shake and hit-stop can stay presentation-only by applying offsets/overlay cues on `FighterLayer` + `VfxLayer` + `OverlayLayer`, without touching combat rule scripts.
+- 2026-02-12: Rematch safety for hit feedback is more deterministic when `BattleScreen._reset_match()` explicitly calls pipeline-level state reset (`reset_temporary_state`) before intro resumes.
+- 2026-02-12: Capturing/restoring fighter rest scale (`capture_rest_scale` + `reset_temporary_feedback_state`) prevents hit-stop tween residue from leaking across rematch boundaries.
+- 2026-02-12: Inserted "K.O." and "TIME UP" banners into the match resolution sequence using `await` timers, enhancing dramatic pacing without blocking the main game loop or altering win logic.
+- 2026-02-12: Reused `_show_banner` tween logic for new match-end states to maintain visual consistency across Round Start, Fight, KO, and Time Up.
+- 2026-02-12: Rematch reset hardening is more stable when `HitFeedbackPipeline` restores both base layer position and base layer scale, not only offsets.
+- 2026-02-12: `FighterVisual.reset_temporary_feedback_state()` must cancel flash tween and restore rest body color to prevent temporary hit-flash tint leaking into the next round.
+- 2026-02-12: `start-demo.sh --verify-only` now performs deterministic token assertions (`TOKEN_OK:*`) for both legacy regression tokens and Phase-1 QA tokens, improving CI-style acceptance stability.
+- 2026-02-12: `qa_placeholder_visuals_removed.gd` can validate placeholder cleanup safely by checking battle script placeholder references plus runtime fighter visual binding, without touching combat business logic.

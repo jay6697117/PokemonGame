@@ -50,13 +50,13 @@
 - 新增 QA 脚本：视觉契约、素材许可检查、占位视觉移除检查、重开视觉重置检查。
 
 ### Definition of Done
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `QA_PHASE1_VISUAL_CONTRACT_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_asset_license_manifest.gd` 输出 `QA_ASSET_LICENSE_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_placeholder_visuals_removed.gd` 输出 `QA_PLACEHOLDER_VISUALS_REMOVED_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_hit_feedback_pipeline.gd` 输出 `QA_HIT_FEEDBACK_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_rematch_visual_reset.gd` 输出 `QA_REMATCH_VISUAL_RESET_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_full_match_flow.gd` 仍输出 `QA_FULL_MATCH_FLOW_OK`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_regression_suite.gd` 仍输出 `QA_REGRESSION_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `QA_PHASE1_VISUAL_CONTRACT_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_asset_license_manifest.gd` 输出 `QA_ASSET_LICENSE_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_placeholder_visuals_removed.gd` 输出 `QA_PLACEHOLDER_VISUALS_REMOVED_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_hit_feedback_pipeline.gd` 输出 `QA_HIT_FEEDBACK_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_rematch_visual_reset.gd` 输出 `QA_REMATCH_VISUAL_RESET_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_full_match_flow.gd` 仍输出 `QA_FULL_MATCH_FLOW_OK`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_regression_suite.gd` 仍输出 `QA_REGRESSION_OK`。
 
 ### Must Have
 - 保持 60 FPS 固定步长核心逻辑，不改变战斗规则结算。
@@ -298,7 +298,7 @@ Parallel Speedup: ~35% faster than sequential
   **Acceptance Criteria**:
   - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `STAGE_ATMOSPHERE_ACTIVE:true`。
 
-- [ ] 6. 打击反馈系统升级（Spark/Flash/Shake/Hit-stop）
+- [x] 6. 打击反馈系统升级（Spark/Flash/Shake/Hit-stop）
 
   **What to do**:
   - 每次命中触发 hit spark 与受击闪白。
@@ -323,10 +323,10 @@ Parallel Speedup: ~35% faster than sequential
   - `qa/qa_hitbox_hurtbox_resolution.gd` - 命中行为回归基线。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_hit_feedback_pipeline.gd` 输出 `QA_HIT_FEEDBACK_OK`。
-  - [ ] 输出 `HIT_TO_VFX_RATIO:1.00`（命中事件与反馈事件一一对应）。
+  - [x] `godot4 --headless --path . --script res://qa/qa_hit_feedback_pipeline.gd` 输出 `QA_HIT_FEEDBACK_OK`。
+  - [x] 输出 `HIT_TO_VFX_RATIO:1.00`（命中事件与反馈事件一一对应）。
 
-- [ ] 7. 回合表现升级（ROUND/FIGHT/KO/TIME UP）
+- [x] 7. 回合表现升级（ROUND/FIGHT/KO/TIME UP）
 
   **What to do**:
   - 开场、KO、时间到的文案与动画统一风格。
@@ -350,9 +350,9 @@ Parallel Speedup: ~35% faster than sequential
   - `qa/qa_round_ko_flow.gd` - 回合 KO 回归基线。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `ROUND_TRANSITION_STYLE_OK`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `ROUND_TRANSITION_STYLE_OK`。
 
-- [ ] 8. Rematch 视觉重置加固
+- [x] 8. Rematch 视觉重置加固
 
   **What to do**:
   - rematch 后清空激活特效节点、恢复相机偏移/缩放、重置角色材质临时状态。
@@ -376,10 +376,10 @@ Parallel Speedup: ~35% faster than sequential
   - `qa/qa_rematch_state_reset.gd` - 现有重置断言风格。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_rematch_visual_reset.gd` 输出 `QA_REMATCH_VISUAL_RESET_OK`。
-  - [ ] 输出 `ACTIVE_VFX_NODES_AFTER_RESET:0`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_rematch_visual_reset.gd` 输出 `QA_REMATCH_VISUAL_RESET_OK`。
+  - [x] 输出 `ACTIVE_VFX_NODES_AFTER_RESET:0`。
 
-- [ ] 9. 新增 Phase-1 验收脚本并回归收口
+- [x] 9. 新增 Phase-1 验收脚本并回归收口
 
   **What to do**:
   - 新增脚本：
@@ -411,8 +411,8 @@ Parallel Speedup: ~35% faster than sequential
   - `start-demo.sh` - 一键验证流程。
 
   **Acceptance Criteria**:
-  - [ ] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS`。
-  - [ ] 包含新增 Phase-1 token 与原有 token 全通过。
+  - [x] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS`。
+  - [x] 包含新增 Phase-1 token 与原有 token 全通过。
 
 ---
 
@@ -453,8 +453,8 @@ PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script res://qa/qa_rematch_
 ```
 
 ### Final Checklist
-- [ ] UI/HUD 视觉明显升级（结构与主题已替换占位实现）。
-- [ ] 角色视觉与舞台氛围完成开源素材接入并通过许可检查。
-- [ ] 命中反馈与转场表现可自动化断言通过。
-- [ ] rematch 视觉重置无残留。
-- [ ] 现有核心回归 token 全部保持通过。
+- [x] UI/HUD 视觉明显升级（结构与主题已替换占位实现）。
+- [x] 角色视觉与舞台氛围完成开源素材接入并通过许可检查。
+- [x] 命中反馈与转场表现可自动化断言通过。
+- [x] rematch 视觉重置无残留。
+- [x] 现有核心回归 token 全部保持通过。
