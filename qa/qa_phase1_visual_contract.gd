@@ -87,5 +87,6 @@ func _init() -> void:
 		return
 
 	print("ROUND_TRANSITION_STYLE_OK")
+	print("QA_PHASE1_VISUAL_CONTRACT_OK")
 	
 	quit(0)
