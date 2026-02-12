@@ -16,6 +16,7 @@ run/max_fps=60
 [autoload]
 
 GameConfig="*res://scripts/global_config.gd"
+GameSession="*res://scripts/game_session.gd"
 
 [display]
 

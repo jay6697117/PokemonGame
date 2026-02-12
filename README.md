@@ -21,3 +21,15 @@ PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_full_ma
 PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_regression_suite.gd"
 PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://tests/run_all_tests.gd"
 ```
+
+## One-click demo script
+
+```bash
+chmod +x ./start-demo.sh
+
+# Run full checklist, then launch game window
+./start-demo.sh
+
+# Run checklist only (no game window)
+./start-demo.sh --verify-only
+```
