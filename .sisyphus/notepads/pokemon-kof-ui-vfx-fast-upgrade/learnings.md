@@ -1,14 +1,7 @@
-# Learnings
-
-- 2026-02-12: QA scripts in this repo use deterministic uppercase tokens (for example `QA_*_OK`) plus machine-assertable counters (`KEY:VALUE`) for CI parsing.
-- 2026-02-12: Asset-governance baseline works best when scanning `res://assets` recursively and ignoring hidden files/`.import`, so placeholder keep files do not produce false positives.
-
-## Godot 4 Headless Theme Management
-- Date: 2026-02-12
-- Finding: `class_name` defined in scripts might not be globally available in headless execution if `project.godot` isn't updated by the editor. Using `preload("res://path/to/script.gd")` ensures scripts can find dependencies without relying on the global class cache.
-- Finding: Code-driven UI (creating nodes in `_ready`) makes theme extraction very clean (search/replace constants), but harder to visualize than scene-based UI.
-
-## Battle Scene Layering
-- Date: 2026-02-12
-- Finding: `Control` nodes respect tree order for drawing, making `_build_ui` logic simple (add to layer = sort correctly).
-- Finding: Separating layout (VBox) from visuals (Arena) required a spacer approach in the VBox to maintain the layout while the actual Arena visual is in a different layer (`FighterLayer`).
+- 2026-02-12: `ColorRect` and `CPUParticles2D` (square shape) are sufficient for prototyping "Anime Arena" atmosphere without external textures.
+- 2026-02-12: Centralized visual management (`ArenaAtmosphere.gd`) that injects nodes into specific layers (`BackgroundLayer`, `FighterLayer`, `VfxLayer`) provides better separation of concerns than monolithic `BattleScreen`.
+- 2026-02-12: Preserving legacy coordinate systems (by matching Control anchors/offsets) is critical when refactoring UI hierarchy to avoid breaking gameplay logic (fighter movement limits).
+- 2026-02-12: Implemented "Anime Arena" banner style using code-only `Tween` sequences for text scaling (elastic slam) and background strip expansion, avoiding external assets.
+- 2026-02-12: Centralized banner visibility management into `_show_banner` and `_hide_banner` ensures consistent state reset between rounds and matches.
+- 2026-02-12: Deterministic hit-feedback validation is easier when the presentation pipeline exposes explicit counters (`total_hits`, `spark_count`, `flash_count`, `shake_count`, `hit_stop_count`) consumed by QA scripts.
+- 2026-02-12: Camera-shake and hit-stop can stay presentation-only by applying offsets/overlay cues on `FighterLayer` + `VfxLayer` + `OverlayLayer`, without touching combat rule scripts.

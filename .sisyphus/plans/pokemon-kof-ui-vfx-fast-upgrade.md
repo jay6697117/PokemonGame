@@ -246,7 +246,7 @@ Parallel Speedup: ~35% faster than sequential
   **Acceptance Criteria**:
   - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `REQUIRED_NODES_PRESENT:true`。
 
-- [ ] 4. 接入开源角色视觉层（双角色 + 镜像可读）
+- [x] 4. 接入开源角色视觉层（双角色 + 镜像可读）
 
   **What to do**:
   - 为两名角色接入开源 sprite/animation 资源。
@@ -271,9 +271,9 @@ Parallel Speedup: ~35% faster than sequential
   - `scripts/flow/character_select_screen.gd` - 选角传参路径。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `FIGHTER_VISUALS_BOUND:true`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `FIGHTER_VISUALS_BOUND:true`。
 
-- [ ] 5. 接入竞技场舞台氛围层（背景/前景/轻动效）
+- [x] 5. 接入竞技场舞台氛围层（背景/前景/轻动效）
 
   **What to do**:
   - 新增舞台背景、前景装饰与轻量动画（循环可控）。
@@ -296,7 +296,7 @@ Parallel Speedup: ~35% faster than sequential
   - `scripts/flow/battle_screen.gd` - 现有 arena 占位背景逻辑。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `STAGE_ATMOSPHERE_ACTIVE:true`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `STAGE_ATMOSPHERE_ACTIVE:true`。
 
 - [ ] 6. 打击反馈系统升级（Spark/Flash/Shake/Hit-stop）
 

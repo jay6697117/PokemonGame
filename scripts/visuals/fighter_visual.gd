@@ -3,6 +3,7 @@ class_name FighterVisual
 
 var body: ColorRect
 var face_indicator: ColorRect
+var _hit_stop_tween: Tween
 
 var fighter_id: String = ""
 var is_mirror: bool = false
@@ -69,4 +70,16 @@ func flash(flash_color: Color, duration: float) -> void:
 	var tween := create_tween()
 	tween.tween_property(body, "color", original, duration)
 
+func hit_stop(duration: float, recover_duration: float = 0.04) -> void:
+	if duration <= 0.0:
+		return
+
+	if _hit_stop_tween != null:
+		_hit_stop_tween.kill()
+
+	var original_scale := scale
+	scale = Vector2(original_scale.x * 1.05, original_scale.y * 0.97)
+	_hit_stop_tween = create_tween()
+	_hit_stop_tween.tween_interval(duration)
+	_hit_stop_tween.tween_property(self, "scale", original_scale, recover_duration)
 

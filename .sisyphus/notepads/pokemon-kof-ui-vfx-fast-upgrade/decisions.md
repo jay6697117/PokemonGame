@@ -1,19 +1,7 @@
-# Decisions
-
-- 2026-02-12: Established baseline manifest file at `data/assets_manifest.json` with schema `assets[]` entries requiring `source_url`, `license`, `attribution_required`, and `asset_path`.
-- 2026-02-12: Locked allowed license set to `CC0` and `CC-BY`; `CC-BY` entries must set `attribution_required=true`.
-- 2026-02-12: Added rule-based forbidden official-asset detection using normalized term matching (`pokemon`, `nintendo`, `gamefreak`, `thepokemoncompany`, `pokemon.com`) against both `asset_path` and `source_url`.
-
-## Anime Arena Theme Implementation
-- Date: 2026-02-12
-- Decision: Implemented `AnimeArenaTheme` as a static GDScript constant file (`scripts/theme/anime_arena_theme.gd`) rather than a Godot `.tres` Resource.
-  - Reason: The existing UI (`battle_screen.gd`) is purely code-driven. Using a script-based theme makes it easier to integrate directly into the code logic without overhauling the entire UI system to use Control nodes with Theme overrides extensively.
-  - Impact: Future styling changes are centralized in one file, but we lose visual editor preview for now.
-- Decision: Explicitly `preload` the theme script in `battle_screen.gd`.
-  - Reason: `class_name` registration requires editor re-scan or `project.godot` updates which are brittle in headless/CI environments. Preload is robust.
-
-## Battle Scene Refactoring
-- Date: 2026-02-12
-- Decision: Implemented `BackgroundLayer`, `FighterLayer`, `VfxLayer`, `HudLayer`, `OverlayLayer` as direct children of `Battle` root in `battle.tscn`.
-- Decision: Maintained `HudLayer` as the primary layout driver via `VBoxContainer`, using a transparent `Control` spacer to reserve screen space for the `FighterLayer` content.
-  - Reason: `FighterLayer` sits behind the HUD buttons visually but needs to align with the layout gap. A spacer ensures the buttons stay at the bottom without complex manual positioning logic.
+- 2026-02-12: Decision: Implement `ArenaAtmosphere` as a code-driven node generator instead of a static `.tscn` file to avoid manual scene file editing errors and ensure dynamic layer injection.
+- 2026-02-12: Decision: Use `CPUParticles2D` for foreground atmosphere (dust motes) instead of a Shader to maximize compatibility and minimize asset dependencies.
+- 2026-02-12: Decision: Keep `arena_overlay` geometry identical to legacy `arena` rect to avoid rewriting fighter movement constraints in `_unhandled_input`.
+- 2026-02-12: Decision: Refactored `_show_banner` to handle both text and a new background `ColorRect` to create a cinematic strip effect for Round/Fight events.
+- 2026-02-12: Decision: Use `Tween` with `TRANS_ELASTIC` for text entrance to simulate high-impact "slam" effect common in fighting games.
+- 2026-02-12: Decision: Added `HitFeedbackPipeline` as a dedicated presentation node (`scripts/visuals/hit_feedback_pipeline.gd`) and routed `battle_screen.gd::_flash_target` through it to centralize spark/flash/shake/hit-stop behavior.
+- 2026-02-12: Decision: Implemented deterministic QA contract in `qa/qa_hit_feedback_pipeline.gd` using pipeline counters and ratio token output (`HIT_TO_VFX_RATIO:%.2f`) to keep headless verification machine-checkable.
