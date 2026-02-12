@@ -1,5 +1,7 @@
 # Issues
 
+- 2026-02-12: `lsp_diagnostics` for `.gd` is currently unavailable in this environment because configured server `my-lsp` is not installed (`Command not found: my-lsp`).
+
 ## UI Architecture Limitations
 - Date: 2026-02-12
 - Issue: `scenes/ui/match_hud.tscn` is empty, and all UI logic resides in `scripts/flow/battle_screen.gd`. This couples game flow logic with presentation logic.

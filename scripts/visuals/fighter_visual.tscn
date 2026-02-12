@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8q8q8q8q8q8"]
+
+[ext_resource type="Script" path="res://scripts/visuals/fighter_visual.gd" id="1_visual"]
+
+[node name="FighterVisual" type="Node2D"]
+script = ExtResource("1_visual")

@@ -159,7 +159,7 @@ Parallel Speedup: ~35% faster than sequential
 
 ## TODOs
 
-- [ ] 1. 建立素材治理与许可清单基线
+- [x] 1. 建立素材治理与许可清单基线
 
   **What to do**:
   - 建立 `assets/` 目录结构（fighters, vfx, stage, ui）。
@@ -188,10 +188,10 @@ Parallel Speedup: ~35% faster than sequential
   - `README.md` - 项目运行与验证命令入口。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_asset_license_manifest.gd` 输出 `QA_ASSET_LICENSE_OK`。
-  - [ ] 输出 `UNLICENSED_ASSETS:0` 与 `FORBIDDEN_OFFICIAL_ASSETS:0`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_asset_license_manifest.gd` 输出 `QA_ASSET_LICENSE_OK`。
+  - [x] 输出 `UNLICENSED_ASSETS:0` 与 `FORBIDDEN_OFFICIAL_ASSETS:0`。
 
-- [ ] 2. 建立竞技场动漫风 UI 主题基线
+- [x] 2. 建立竞技场动漫风 UI 主题基线
 
   **What to do**:
   - 抽离颜色、字号、边框、阴影参数到统一主题配置（脚本或 theme 资源）。
@@ -217,9 +217,9 @@ Parallel Speedup: ~35% faster than sequential
   - `scenes/ui/match_hud.tscn` - HUD 场景挂载入口。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `HUD_THEME_PROFILE:ANIME_ARENA`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `HUD_THEME_PROFILE:ANIME_ARENA`。
 
-- [ ] 3. 重构 battle 场景为可扩展视觉层级
+- [x] 3. 重构 battle 场景为可扩展视觉层级
 
   **What to do**:
   - 将 `scenes/battle.tscn` 拆为明确层：`BackgroundLayer`, `FighterLayer`, `VfxLayer`, `HudLayer`, `OverlayLayer`。
@@ -244,7 +244,7 @@ Parallel Speedup: ~35% faster than sequential
   - `scripts/flow/battle_screen.gd` - 当前 UI 与战斗表现混合，需解耦。
 
   **Acceptance Criteria**:
-  - [ ] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `REQUIRED_NODES_PRESENT:true`。
+  - [x] `godot4 --headless --path . --script res://qa/qa_phase1_visual_contract.gd` 输出 `REQUIRED_NODES_PRESENT:true`。
 
 - [ ] 4. 接入开源角色视觉层（双角色 + 镜像可读）
 

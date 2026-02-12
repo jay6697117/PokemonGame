@@ -20,4 +20,22 @@ func _init() -> void:
 		return
 		
 	print("HUD_THEME_PROFILE:ANIME_ARENA")
+
+	# Check Battle Scene Structure
+	var battle_scene = load("res://scenes/battle.tscn").instantiate()
+	var required_layers = ["BackgroundLayer", "FighterLayer", "VfxLayer", "HudLayer", "OverlayLayer"]
+	var missing = []
+	for layer in required_layers:
+		if not battle_scene.has_node(layer):
+			missing.append(layer)
+			
+	if missing.size() > 0:
+		printerr("ERROR: Missing required layers in battle.tscn: ", missing)
+		battle_scene.free()
+		quit(1)
+		return
+
+	print("REQUIRED_NODES_PRESENT:true")
+	battle_scene.free()
+	
 	quit(0)

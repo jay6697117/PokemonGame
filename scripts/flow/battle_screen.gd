@@ -43,13 +43,14 @@ func _load_fighter_names() -> void:
 		_p2_name = str(session.call("get_p2_display_name"))
 
 func _build_ui() -> void:
-	for child in get_children():
-		child.queue_free()
+	for layer in [$BackgroundLayer, $FighterLayer, $VfxLayer, $HudLayer, $OverlayLayer]:
+		for child in layer.get_children():
+			child.queue_free()
 
 	var background := ColorRect.new()
 	background.color = AnimeArenaTheme.COLOR_BACKGROUND_MAIN
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(background)
+	$BackgroundLayer.add_child(background)
 
 	var root_margin := MarginContainer.new()
 	root_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -57,7 +58,7 @@ func _build_ui() -> void:
 	root_margin.add_theme_constant_override("margin_top", AnimeArenaTheme.MARGIN_OUTER_Y)
 	root_margin.add_theme_constant_override("margin_right", AnimeArenaTheme.MARGIN_OUTER_X)
 	root_margin.add_theme_constant_override("margin_bottom", AnimeArenaTheme.MARGIN_OUTER_Y)
-	add_child(root_margin)
+	$HudLayer.add_child(root_margin)
 
 	var root := VBoxContainer.new()
 	root.add_theme_constant_override("separation", AnimeArenaTheme.SPACING_MAIN_V)
@@ -106,11 +107,22 @@ func _build_ui() -> void:
 	_timer_label.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_HUD_LABEL)
 	root.add_child(_timer_label)
 
+	var arena_spacer := Control.new()
+	arena_spacer.custom_minimum_size = Vector2(0, 360)
+	arena_spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	root.add_child(arena_spacer)
+
 	var arena := ColorRect.new()
 	arena.color = AnimeArenaTheme.COLOR_ARENA_FLOOR
-	arena.custom_minimum_size = Vector2(0, 360)
-	arena.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	root.add_child(arena)
+	# arena.custom_minimum_size = Vector2(0, 360) # Handled by anchor
+	# Align arena in FighterLayer to center of screen vertically
+	arena.anchor_top = 0.5
+	arena.anchor_bottom = 0.5
+	arena.anchor_left = 0.0
+	arena.anchor_right = 1.0
+	arena.offset_top = -180
+	arena.offset_bottom = 180
+	$FighterLayer.add_child(arena)
 
 	var arena_overlay := Control.new()
 	arena_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -157,7 +169,7 @@ func _build_ui() -> void:
 	_center_banner.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_BANNER_LARGE)
 	_center_banner.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_center_banner.z_index = 10
-	add_child(_center_banner)
+	$OverlayLayer.add_child(_center_banner)
 
 	set_process(true)
 
