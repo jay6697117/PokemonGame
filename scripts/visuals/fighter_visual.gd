@@ -4,6 +4,9 @@ class_name FighterVisual
 var body: ColorRect
 var face_indicator: ColorRect
 var _hit_stop_tween: Tween
+var _flash_tween: Tween
+var _rest_scale := Vector2.ONE
+var _rest_body_color := Color.WHITE
 
 var fighter_id: String = ""
 var is_mirror: bool = false
@@ -16,7 +19,24 @@ func _ready() -> void:
 		body = $Body
 		face_indicator = $Body/FaceIndicator
 
+	_rest_scale = scale
 	_update_visuals()
+	if body != null:
+		_rest_body_color = body.color
+
+func capture_rest_scale() -> void:
+	_rest_scale = scale
+
+func reset_temporary_feedback_state() -> void:
+	if _hit_stop_tween != null:
+		_hit_stop_tween.kill()
+		_hit_stop_tween = null
+	if _flash_tween != null:
+		_flash_tween.kill()
+		_flash_tween = null
+	scale = _rest_scale
+	if body != null:
+		body.color = _rest_body_color
 
 func _create_placeholder_nodes() -> void:
 	body = ColorRect.new()
@@ -59,16 +79,21 @@ func _update_visuals() -> void:
 		face_indicator.color = Color(1, 0.5, 0.5) # Reddish indicator
 	else:
 		face_indicator.color = Color.WHITE
+
+	_rest_body_color = body.color
 	
 	# Facing handled by scale.x via parent or this node
 
 func flash(flash_color: Color, duration: float) -> void:
 	if not body:
 		return
-	var original := body.color
+	if _flash_tween != null:
+		_flash_tween.kill()
+	var original := _rest_body_color
 	body.color = flash_color
-	var tween := create_tween()
-	tween.tween_property(body, "color", original, duration)
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(body, "color", original, duration)
+	_flash_tween.finished.connect(_on_flash_finished, CONNECT_ONE_SHOT)
 
 func hit_stop(duration: float, recover_duration: float = 0.04) -> void:
 	if duration <= 0.0:
@@ -83,3 +108,5 @@ func hit_stop(duration: float, recover_duration: float = 0.04) -> void:
 	_hit_stop_tween.tween_interval(duration)
 	_hit_stop_tween.tween_property(self, "scale", original_scale, recover_duration)
 
+func _on_flash_finished() -> void:
+	_flash_tween = null

@@ -27,6 +27,8 @@ const COLOR_DOUBLE_KO := Color("f97316") # Orange-500
 # Banners / Intro
 const COLOR_BANNER_ROUND := Color("fde047") # Yellow-300
 const COLOR_BANNER_FIGHT := Color("fb7185") # Rose-400
+const COLOR_BANNER_KO := Color("ef4444") # Red-500
+const COLOR_BANNER_TIME_UP := Color("f59e0b") # Amber-500
 
 # Text / Layout
 const FONT_SIZE_TITLE := 32

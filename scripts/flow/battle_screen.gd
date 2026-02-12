@@ -35,6 +35,7 @@ var _hit_feedback_pipeline: Node
 var _action_hint: Label
 var _center_banner: Label
 var _banner_bg: ColorRect
+var _banner_tween: Tween
 
 func _ready() -> void:
 	_load_fighter_data()
@@ -151,6 +152,8 @@ func _build_ui() -> void:
 	# Facing right by default
 	_arena_p1.scale.x = abs(_arena_p1.scale.x)
 	arena_overlay.add_child(_arena_p1)
+	if _arena_p1.has_method("capture_rest_scale"):
+		_arena_p1.call("capture_rest_scale")
 
 	_arena_p2 = FighterVisualScene.instantiate()
 	_arena_p2.setup(_p2_id, is_mirror, true)
@@ -160,6 +163,8 @@ func _build_ui() -> void:
 	# Facing left
 	_arena_p2.scale.x = -abs(_arena_p2.scale.x)
 	arena_overlay.add_child(_arena_p2)
+	if _arena_p2.has_method("capture_rest_scale"):
+		_arena_p2.call("capture_rest_scale")
 
 	var existing_feedback_pipeline := get_node_or_null("HitFeedbackPipeline")
 	if existing_feedback_pipeline != null:
@@ -276,6 +281,14 @@ func _check_ko() -> void:
 		return
 
 	_is_match_over = true
+	_fight_enabled = false
+
+	# Show K.O.
+	_show_banner("K.O.", AnimeArenaTheme.COLOR_BANNER_KO)
+	await get_tree().create_timer(1.5).timeout
+	_hide_banner()
+	await get_tree().create_timer(0.2).timeout
+
 	if p1_hp <= 0 and p2_hp <= 0:
 		_finish_match("Double KO! Press Rematch", "DOUBLE KO", AnimeArenaTheme.COLOR_DOUBLE_KO)
 		return
@@ -291,16 +304,30 @@ func _on_rematch_pressed() -> void:
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
+func _reset_hit_feedback_presentation_state() -> void:
+	if _hit_feedback_pipeline != null and _hit_feedback_pipeline.has_method("reset_temporary_state"):
+		_hit_feedback_pipeline.call("reset_temporary_state")
+
+	for fighter in [_arena_p1, _arena_p2]:
+		if fighter != null and fighter.has_method("reset_temporary_feedback_state"):
+			fighter.call("reset_temporary_feedback_state")
+
 func _reset_match() -> void:
 	p1_hp = START_HP
 	p2_hp = START_HP
 	_is_match_over = false
 	_fight_enabled = false
 	_round_time_left = ROUND_TIME_LIMIT
+	_hide_banner()
+	_reset_hit_feedback_presentation_state()
 	_arena_p1.position = Vector2(225, 320)
 	_arena_p2.position = Vector2(945, 320)
-	_arena_p1.scale.x = abs(_arena_p1.scale.x)
-	_arena_p2.scale.x = -abs(_arena_p2.scale.x)
+	_arena_p1.scale = Vector2(abs(_arena_p1.scale.x), 1.0)
+	_arena_p2.scale = Vector2(-abs(_arena_p2.scale.x), 1.0)
+	if _arena_p1.has_method("capture_rest_scale"):
+		_arena_p1.call("capture_rest_scale")
+	if _arena_p2.has_method("capture_rest_scale"):
+		_arena_p2.call("capture_rest_scale")
 	_status_label.text = "Get Ready"
 	_update_hud()
 	_start_intro_sequence()
@@ -330,10 +357,21 @@ func _start_intro_sequence() -> void:
 	_status_label.text = "Fight!"
 
 func _hide_banner() -> void:
+	if _banner_tween != null:
+		_banner_tween.kill()
+		_banner_tween = null
+	_center_banner.scale = Vector2.ONE
+	_center_banner.modulate.a = 1.0
 	_center_banner.visible = false
+	_banner_bg.scale = Vector2.ONE
+	_banner_bg.modulate.a = 1.0
 	_banner_bg.visible = false
 
 func _show_banner(text: String, color: Color) -> void:
+	if _banner_tween != null:
+		_banner_tween.kill()
+		_banner_tween = null
+
 	_center_banner.text = text
 	_center_banner.modulate = color
 	_center_banner.visible = true
@@ -346,20 +384,29 @@ func _show_banner(text: String, color: Color) -> void:
 	_banner_bg.scale.y = 0.0
 	_banner_bg.modulate = Color(0, 0, 0, 0.7)
 
-	var tween := create_tween()
-	tween.set_parallel(true)
+	_banner_tween = create_tween()
+	_banner_tween.set_parallel(true)
 	
 	# Background expansion (vertical strip)
-	tween.tween_property(_banner_bg, "scale:y", 1.0, AnimeArenaTheme.BANNER_ANIM_DURATION_IN * 0.8)\
+	_banner_tween.tween_property(_banner_bg, "scale:y", 1.0, AnimeArenaTheme.BANNER_ANIM_DURATION_IN * 0.8)\
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	
 	# Text slam
-	tween.tween_property(_center_banner, "scale", AnimeArenaTheme.BANNER_ANIM_SCALE_END, AnimeArenaTheme.BANNER_ANIM_DURATION_IN)\
+	_banner_tween.tween_property(_center_banner, "scale", AnimeArenaTheme.BANNER_ANIM_SCALE_END, AnimeArenaTheme.BANNER_ANIM_DURATION_IN)\
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_center_banner, "modulate:a", 1.0, AnimeArenaTheme.BANNER_ANIM_DURATION_IN * 0.4)
+	_banner_tween.tween_property(_center_banner, "modulate:a", 1.0, AnimeArenaTheme.BANNER_ANIM_DURATION_IN * 0.4)
 
 
 func _resolve_timeout() -> void:
+	_is_match_over = true
+	_fight_enabled = false
+
+	# Show Time Up
+	_show_banner("TIME UP", AnimeArenaTheme.COLOR_BANNER_TIME_UP)
+	await get_tree().create_timer(1.5).timeout
+	_hide_banner()
+	await get_tree().create_timer(0.2).timeout
+
 	if p1_hp == p2_hp:
 		_finish_match("Time Up - Draw", "DRAW", AnimeArenaTheme.COLOR_DRAW)
 		return

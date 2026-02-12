@@ -18,6 +18,8 @@ var _overlay_layer: Control
 
 var _base_fighter_layer_position := Vector2.ZERO
 var _base_vfx_layer_position := Vector2.ZERO
+var _base_fighter_layer_scale := Vector2.ONE
+var _base_vfx_layer_scale := Vector2.ONE
 var _shake_tween: Tween
 var _hit_stop_overlay_tween: Tween
 var _hit_stop_overlay: ColorRect
@@ -34,7 +36,10 @@ func setup(fighter_layer: Control, vfx_layer: Control, overlay_layer: Control) -
 	_overlay_layer = overlay_layer
 	_base_fighter_layer_position = _fighter_layer.position
 	_base_vfx_layer_position = _vfx_layer.position
+	_base_fighter_layer_scale = _fighter_layer.scale
+	_base_vfx_layer_scale = _vfx_layer.scale
 	_ensure_hit_stop_overlay()
+	reset_temporary_state()
 
 func play_hit_feedback(victim: Node2D) -> void:
 	if victim == null:
@@ -55,6 +60,34 @@ func get_feedback_metrics() -> Dictionary:
 		"shake_count": _shake_count,
 		"hit_stop_count": _hit_stop_count,
 	}
+
+func reset_temporary_state() -> void:
+	if _shake_tween != null:
+		_shake_tween.kill()
+		_shake_tween = null
+	if _hit_stop_overlay_tween != null:
+		_hit_stop_overlay_tween.kill()
+		_hit_stop_overlay_tween = null
+
+	if _fighter_layer != null:
+		_fighter_layer.position = _base_fighter_layer_position
+		_fighter_layer.scale = _base_fighter_layer_scale
+
+	if _vfx_layer != null:
+		_vfx_layer.position = _base_vfx_layer_position
+		_vfx_layer.scale = _base_vfx_layer_scale
+		for child in _vfx_layer.get_children():
+			if child is CanvasItem and str(child.name).begins_with("HitSpark_"):
+				child.queue_free()
+
+	if _hit_stop_overlay != null:
+		_hit_stop_overlay.modulate.a = 0.0
+
+	_total_hits = 0
+	_spark_count = 0
+	_flash_count = 0
+	_shake_count = 0
+	_hit_stop_count = 0
 
 func _spawn_hit_spark(victim: Node2D) -> void:
 	if _vfx_layer == null:
