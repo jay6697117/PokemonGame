@@ -1,5 +1,7 @@
 extends Control
 
+const AnimeArenaTheme := preload("res://scripts/theme/anime_arena_theme.gd")
+
 const START_HP := 1000
 const ROUND_TIME_LIMIT := 60.0
 const INTRO_ROUND_TEXT := "ROUND 1"
@@ -45,30 +47,30 @@ func _build_ui() -> void:
 		child.queue_free()
 
 	var background := ColorRect.new()
-	background.color = Color("111827")
+	background.color = AnimeArenaTheme.COLOR_BACKGROUND_MAIN
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
 
 	var root_margin := MarginContainer.new()
 	root_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	root_margin.add_theme_constant_override("margin_left", 24)
-	root_margin.add_theme_constant_override("margin_top", 20)
-	root_margin.add_theme_constant_override("margin_right", 24)
-	root_margin.add_theme_constant_override("margin_bottom", 20)
+	root_margin.add_theme_constant_override("margin_left", AnimeArenaTheme.MARGIN_OUTER_X)
+	root_margin.add_theme_constant_override("margin_top", AnimeArenaTheme.MARGIN_OUTER_Y)
+	root_margin.add_theme_constant_override("margin_right", AnimeArenaTheme.MARGIN_OUTER_X)
+	root_margin.add_theme_constant_override("margin_bottom", AnimeArenaTheme.MARGIN_OUTER_Y)
 	add_child(root_margin)
 
 	var root := VBoxContainer.new()
-	root.add_theme_constant_override("separation", 14)
+	root.add_theme_constant_override("separation", AnimeArenaTheme.SPACING_MAIN_V)
 	root_margin.add_child(root)
 
 	var title := Label.new()
 	title.text = "Battle Arena"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 32)
+	title.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_TITLE)
 	root.add_child(title)
 
 	var bars := HBoxContainer.new()
-	bars.add_theme_constant_override("separation", 20)
+	bars.add_theme_constant_override("separation", AnimeArenaTheme.SPACING_BARS_H)
 	bars.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.add_child(bars)
 
@@ -96,16 +98,16 @@ func _build_ui() -> void:
 
 	_status_label = Label.new()
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_status_label.add_theme_font_size_override("font_size", 20)
+	_status_label.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_HUD_LABEL)
 	root.add_child(_status_label)
 
 	_timer_label = Label.new()
 	_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_timer_label.add_theme_font_size_override("font_size", 20)
+	_timer_label.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_HUD_LABEL)
 	root.add_child(_timer_label)
 
 	var arena := ColorRect.new()
-	arena.color = Color("1f2937")
+	arena.color = AnimeArenaTheme.COLOR_ARENA_FLOOR
 	arena.custom_minimum_size = Vector2(0, 360)
 	arena.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(arena)
@@ -115,13 +117,13 @@ func _build_ui() -> void:
 	arena.add_child(arena_overlay)
 
 	_arena_p1 = ColorRect.new()
-	_arena_p1.color = Color("f59e0b")
+	_arena_p1.color = AnimeArenaTheme.COLOR_P1_BASE
 	_arena_p1.custom_minimum_size = Vector2(90, 140)
 	_arena_p1.position = Vector2(180, 180)
 	arena_overlay.add_child(_arena_p1)
 
 	_arena_p2 = ColorRect.new()
-	_arena_p2.color = Color("38bdf8")
+	_arena_p2.color = AnimeArenaTheme.COLOR_P2_BASE
 	_arena_p2.custom_minimum_size = Vector2(90, 140)
 	_arena_p2.position = Vector2(900, 180)
 	arena_overlay.add_child(_arena_p2)
@@ -133,7 +135,7 @@ func _build_ui() -> void:
 
 	var action_buttons := HBoxContainer.new()
 	action_buttons.alignment = BoxContainer.ALIGNMENT_CENTER
-	action_buttons.add_theme_constant_override("separation", 14)
+	action_buttons.add_theme_constant_override("separation", AnimeArenaTheme.SPACING_MAIN_V)
 	root.add_child(action_buttons)
 
 	var rematch_button := Button.new()
@@ -152,7 +154,7 @@ func _build_ui() -> void:
 	_center_banner.visible = false
 	_center_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_center_banner.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_center_banner.add_theme_font_size_override("font_size", 56)
+	_center_banner.add_theme_font_size_override("font_size", AnimeArenaTheme.FONT_SIZE_BANNER_LARGE)
 	_center_banner.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_center_banner.z_index = 10
 	add_child(_center_banner)
@@ -210,13 +212,13 @@ func _check_ko() -> void:
 
 	_is_match_over = true
 	if p1_hp <= 0 and p2_hp <= 0:
-		_finish_match("Double KO! Press Rematch", "DOUBLE KO", Color("f97316"))
+		_finish_match("Double KO! Press Rematch", "DOUBLE KO", AnimeArenaTheme.COLOR_DOUBLE_KO)
 		return
 
 	if p1_hp <= 0:
-		_finish_match("%s Wins! Press Rematch" % _p2_name, "%s WINS" % _p2_name.to_upper(), Color("22d3ee"))
+		_finish_match("%s Wins! Press Rematch" % _p2_name, "%s WINS" % _p2_name.to_upper(), AnimeArenaTheme.COLOR_WIN_P2)
 	else:
-		_finish_match("%s Wins! Press Rematch" % _p1_name, "%s WINS" % _p1_name.to_upper(), Color("f59e0b"))
+		_finish_match("%s Wins! Press Rematch" % _p1_name, "%s WINS" % _p1_name.to_upper(), AnimeArenaTheme.COLOR_WIN_P1)
 
 func _on_rematch_pressed() -> void:
 	_reset_match()
@@ -246,12 +248,12 @@ func _update_hud() -> void:
 func _start_intro_sequence() -> void:
 	_intro_ticket += 1
 	var current_ticket := _intro_ticket
-	_show_banner(INTRO_ROUND_TEXT, Color("fde047"))
+	_show_banner(INTRO_ROUND_TEXT, AnimeArenaTheme.COLOR_BANNER_ROUND)
 	await get_tree().create_timer(0.85).timeout
 	if current_ticket != _intro_ticket:
 		return
 
-	_show_banner("FIGHT!", Color("fb7185"))
+	_show_banner("FIGHT!", AnimeArenaTheme.COLOR_BANNER_FIGHT)
 	await get_tree().create_timer(0.65).timeout
 	if current_ticket != _intro_ticket:
 		return
@@ -272,14 +274,14 @@ func _show_banner(text: String, color: Color) -> void:
 
 func _resolve_timeout() -> void:
 	if p1_hp == p2_hp:
-		_finish_match("Time Up - Draw", "DRAW", Color("eab308"))
+		_finish_match("Time Up - Draw", "DRAW", AnimeArenaTheme.COLOR_DRAW)
 		return
 
 	if p1_hp > p2_hp:
-		_finish_match("%s Wins by Time!" % _p1_name, "%s WINS" % _p1_name.to_upper(), Color("f59e0b"))
+		_finish_match("%s Wins by Time!" % _p1_name, "%s WINS" % _p1_name.to_upper(), AnimeArenaTheme.COLOR_WIN_P1)
 		return
 
-	_finish_match("%s Wins by Time!" % _p2_name, "%s WINS" % _p2_name.to_upper(), Color("22d3ee"))
+	_finish_match("%s Wins by Time!" % _p2_name, "%s WINS" % _p2_name.to_upper(), AnimeArenaTheme.COLOR_WIN_P2)
 
 func _finish_match(status_text: String, banner_text: String, banner_color: Color) -> void:
 	_is_match_over = true
@@ -289,6 +291,6 @@ func _finish_match(status_text: String, banner_text: String, banner_color: Color
 
 func _flash_target(target: ColorRect) -> void:
 	var original := target.color
-	target.color = Color("f87171")
+	target.color = AnimeArenaTheme.COLOR_HIT_FLASH
 	var tween := create_tween()
 	tween.tween_property(target, "color", original, 0.18)
