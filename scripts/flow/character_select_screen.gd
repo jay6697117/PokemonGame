@@ -130,9 +130,8 @@ func _populate_fighters() -> void:
 		_p2_option.select(1)
 
 func _selected_fighter(option: OptionButton) -> String:
-	var index := option.get_selected_id()
-	var selected := option.get_item_metadata(index)
-	return str(selected)
+	var selected_index: int = option.get_selected_id()
+	return str(option.get_item_metadata(selected_index))
 
 func _on_start_pressed() -> void:
 	var p1_fighter := _selected_fighter(_p1_option)
