@@ -84,6 +84,18 @@ run_step_with_tokens "Phase-1 rematch visual reset check" \
   "QA_REMATCH_VISUAL_RESET_OK|ACTIVE_VFX_NODES_AFTER_RESET:0" \
   godot4 --headless --path . --script "res://qa/qa_rematch_visual_reset.gd"
 
+run_step_with_tokens "Phase-1 rematch transition race guard check" \
+  "KO_STALE_BLOCKED:true|TIMEUP_STALE_BLOCKED:true|QA_REMATCH_TRANSITION_RACE_GUARD_OK" \
+  godot4 --headless --path . --script "res://qa/qa_rematch_transition_race_guard.gd"
+
+run_step_with_tokens "Phase-1 hit-stop scale stability check" \
+  "QA_HIT_STOP_SCALE_STABILITY_OK" \
+  godot4 --headless --path . --script "res://qa/qa_hit_stop_scale_stability.gd"
+
+run_step_with_tokens "Phase-1 layout metrics scaling check" \
+  "QA_LAYOUT_METRICS_SCALING_OK" \
+  godot4 --headless --path . --script "res://qa/qa_layout_metrics_scaling.gd"
+
 run_step_with_tokens "Private prototype guard check" \
   "QA_PRIVATE_GUARD_OK|PUBLIC_RELEASE_STEPS_PRESENT:false" \
   godot4 --headless --path . --script "res://qa/qa_private_prototype_guard.gd"

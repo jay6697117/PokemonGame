@@ -102,7 +102,7 @@ func hit_stop(duration: float, recover_duration: float = 0.04) -> void:
 	if _hit_stop_tween != null:
 		_hit_stop_tween.kill()
 
-	var original_scale := scale
+	var original_scale := _rest_scale
 	scale = Vector2(original_scale.x * 1.05, original_scale.y * 0.97)
 	_hit_stop_tween = create_tween()
 	_hit_stop_tween.tween_interval(duration)
