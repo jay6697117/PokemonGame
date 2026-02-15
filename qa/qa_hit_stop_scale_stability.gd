@@ -3,6 +3,7 @@ extends SceneTree
 const HIT_COUNT := 20
 const SETTLE_SECONDS := 0.3
 const SCALE_EPSILON := 0.015
+const INTRO_SETTLE_SECONDS := 1.7
 
 func _init() -> void:
 	call_deferred("_run")
@@ -34,8 +35,11 @@ func _run() -> void:
 		_fail("HIT_STOP_SCALE_DRIFT: baseline=%s final=%s" % [baseline_scale, final_scale], battle)
 		return
 
+	await create_timer(INTRO_SETTLE_SECONDS).timeout
+
 	print("QA_HIT_STOP_SCALE_STABILITY_OK")
 	battle.queue_free()
+	await process_frame
 	await process_frame
 	await process_frame
 	quit(0)

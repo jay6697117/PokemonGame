@@ -55,7 +55,7 @@
 - `./start-demo.sh --verify-only` 最终通过，且不出现 token 缺失。
 
 ### Definition of Done
-- [ ] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS` 且无 `TOKEN_MISSING:`。
+- [x] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS` 且无 `TOKEN_MISSING:`。
 - [ ] Phase A 推送后 `git status -sb` 不再显示 `[ahead N]`。
 - [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_hit_stop_scale_stability.gd"` 输出 `QA_HIT_STOP_SCALE_STABILITY_OK` 且不含 `ObjectDB instances leaked at exit`。
 - [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_layout_metrics_scaling.gd"` 输出 `QA_LAYOUT_METRICS_SCALING_OK` 且不含 `ObjectDB instances leaked at exit`。
@@ -169,7 +169,7 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
 
 ## TODOs
 
-- [ ] 1. Phase A 基线验证与证据锁定
+- [x] 1. Phase A 基线验证与证据锁定
 
   **What to do**:
   - 运行 `./start-demo.sh --verify-only` 并保存完整输出到证据文件。
@@ -201,10 +201,10 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   - `start-demo.sh:103` - `DEMO_CHECKLIST_PASS` 终态 token。
 
   **Acceptance Criteria**:
-  - [ ] `./start-demo.sh --verify-only` 返回 0。
-  - [ ] 输出包含 `KO_STALE_BLOCKED:true` 与 `TIMEUP_STALE_BLOCKED:true`。
-  - [ ] 输出包含 `QA_HIT_STOP_SCALE_STABILITY_OK` 与 `QA_LAYOUT_METRICS_SCALING_OK`。
-  - [ ] 输出包含 `DEMO_CHECKLIST_PASS` 且不含 `TOKEN_MISSING:`。
+  - [x] `./start-demo.sh --verify-only` 返回 0。
+  - [x] 输出包含 `KO_STALE_BLOCKED:true` 与 `TIMEUP_STALE_BLOCKED:true`。
+  - [x] 输出包含 `QA_HIT_STOP_SCALE_STABILITY_OK` 与 `QA_LAYOUT_METRICS_SCALING_OK`。
+  - [x] 输出包含 `DEMO_CHECKLIST_PASS` 且不含 `TOKEN_MISSING:`。
 
   **Commit**: NO
 
