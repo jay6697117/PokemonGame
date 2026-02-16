@@ -208,7 +208,7 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
 
   **Commit**: NO
 
-- [ ] 2. Phase A 原子提交与推送（仅功能修复）
+- [x] 2. Phase A 原子提交与推送（仅功能修复）
 
   **What to do**:
   - 仅暂存本批功能修复相关文件。
@@ -244,9 +244,9 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   - `start-demo.sh` - 新 QA token gate 接入。
 
   **Acceptance Criteria**:
-  - [ ] 提交仅包含上述目标文件，无额外噪音。
-  - [ ] 推送成功后 `git status -sb` 不包含 `[ahead `。
-  - [ ] 提交前后可追溯到 Task 1 的验证证据。
+  - [x] 提交仅包含上述目标文件，无额外噪音。
+  - [x] 推送成功后 `git status -sb` 不包含 `[ahead `。
+  - [x] 提交前后可追溯到 Task 1 的验证证据。
 
   **Commit**: YES
   - Message: `fix(battle): lock in rematch/layout/hit-stop fixes with QA gates`

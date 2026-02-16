@@ -3,6 +3,7 @@ extends SceneTree
 const BASE_SIZE := Vector2(1280.0, 720.0)
 const WIDE_SIZE := Vector2(1920.0, 1080.0)
 const RATIO_EPSILON := 0.02
+const INTRO_SETTLE_SECONDS := 1.7
 
 func _init() -> void:
 	call_deferred("_run")
@@ -93,8 +94,11 @@ func _run() -> void:
 		_fail("RUNTIME_PARTICLE_CENTER_MISMATCH", battle)
 		return
 
+	await create_timer(INTRO_SETTLE_SECONDS).timeout
+
 	print("QA_LAYOUT_METRICS_SCALING_OK")
 	battle.queue_free()
+	await process_frame
 	await process_frame
 	await process_frame
 	quit(0)
