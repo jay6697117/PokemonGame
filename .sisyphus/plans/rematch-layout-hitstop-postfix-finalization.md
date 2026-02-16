@@ -56,9 +56,9 @@
 
 ### Definition of Done
 - [x] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS` 且无 `TOKEN_MISSING:`。
-- [ ] Phase A 推送后 `git status -sb` 不再显示 `[ahead N]`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_hit_stop_scale_stability.gd"` 输出 `QA_HIT_STOP_SCALE_STABILITY_OK` 且不含 `ObjectDB instances leaked at exit`。
-- [ ] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_layout_metrics_scaling.gd"` 输出 `QA_LAYOUT_METRICS_SCALING_OK` 且不含 `ObjectDB instances leaked at exit`。
+- [x] Phase A 推送后 `git status -sb` 不再显示 `[ahead N]`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_hit_stop_scale_stability.gd"` 输出 `QA_HIT_STOP_SCALE_STABILITY_OK` 且不含 `ObjectDB instances leaked at exit`。
+- [x] `PATH="$(pwd)/bin:$PATH" godot4 --headless --path . --script "res://qa/qa_layout_metrics_scaling.gd"` 输出 `QA_LAYOUT_METRICS_SCALING_OK` 且不含 `ObjectDB instances leaked at exit`。
 
 ### Must Have
 - 保持当前 1+2+3 修复行为不回退。
@@ -251,7 +251,7 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   **Commit**: YES
   - Message: `fix(battle): lock in rematch/layout/hit-stop fixes with QA gates`
 
-- [ ] 3. 清理 `qa_hit_stop_scale_stability.gd` 的 ObjectDB 泄漏警告
+- [x] 3. 清理 `qa_hit_stop_scale_stability.gd` 的 ObjectDB 泄漏警告
 
   **What to do**:
   - 仅在该 QA 脚本内调整生命周期收尾（释放时序、退出前 frame settle、引用清理）。
@@ -284,13 +284,13 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   - `https://docs.godotengine.org/en/stable/classes/class_scenetreetimer.html` - timer 生命周期与引用规则。
 
   **Acceptance Criteria**:
-  - [ ] 单次运行输出 `QA_HIT_STOP_SCALE_STABILITY_OK`。
-  - [ ] 单次运行输出不含 `ObjectDB instances leaked at exit`。
-  - [ ] 连续 5 次运行均满足上述两条。
+  - [x] 单次运行输出 `QA_HIT_STOP_SCALE_STABILITY_OK`。
+  - [x] 单次运行输出不含 `ObjectDB instances leaked at exit`。
+  - [x] 连续 5 次运行均满足上述两条。
 
   **Commit**: NO
 
-- [ ] 4. 清理 `qa_layout_metrics_scaling.gd` 的 ObjectDB 泄漏警告
+- [x] 4. 清理 `qa_layout_metrics_scaling.gd` 的 ObjectDB 泄漏警告
 
   **What to do**:
   - 仅在该 QA 脚本内修正 SubViewport/节点释放与退出时序。
@@ -323,13 +323,13 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   - `https://docs.godotengine.org/en/stable/classes/class_control.html` - `resized/NOTIFICATION_RESIZED` 与尺寸更新生命周期。
 
   **Acceptance Criteria**:
-  - [ ] 单次运行输出 `QA_LAYOUT_METRICS_SCALING_OK`。
-  - [ ] 单次运行输出不含 `ObjectDB instances leaked at exit`。
-  - [ ] 连续 5 次运行均满足上述两条。
+  - [x] 单次运行输出 `QA_LAYOUT_METRICS_SCALING_OK`。
+  - [x] 单次运行输出不含 `ObjectDB instances leaked at exit`。
+  - [x] 连续 5 次运行均满足上述两条。
 
   **Commit**: NO
 
-- [ ] 5. 最终回归、warning 清理提交（如有）与推送同步
+- [x] 5. 最终回归、warning 清理提交（如有）与推送同步
 
   **What to do**:
   - 运行全链路回归 `./start-demo.sh --verify-only`。
@@ -361,9 +361,9 @@ Parallel Speedup: ~20% (Task 3 + Task 4)
   - `qa/qa_layout_metrics_scaling.gd` - warning 清理结果验证。
 
   **Acceptance Criteria**:
-  - [ ] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS`。
-  - [ ] 输出不含 `TOKEN_MISSING:`。
-  - [ ] 若存在 warning 清理改动：完成独立提交与推送，`git status -sb` 不 ahead。
+  - [x] `./start-demo.sh --verify-only` 输出 `DEMO_CHECKLIST_PASS`。
+  - [x] 输出不含 `TOKEN_MISSING:`。
+  - [x] 若存在 warning 清理改动：完成独立提交与推送，`git status -sb` 不 ahead。
 
   **Commit**: YES (if files changed)
   - Message: `chore(qa): eliminate ObjectDB leak warnings in headless scripts`
@@ -399,7 +399,7 @@ done
 ```
 
 ### Final Checklist
-- [ ] 所有 Must Have 满足
-- [ ] 所有 Must NOT Have 未触发
-- [ ] Phase A 与 Phase B 分离提交已执行
-- [ ] 最终回归与分支同步状态均通过
+- [x] 所有 Must Have 满足
+- [x] 所有 Must NOT Have 未触发
+- [x] Phase A 与 Phase B 分离提交已执行
+- [x] 最终回归与分支同步状态均通过
