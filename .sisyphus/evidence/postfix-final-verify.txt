@@ -1,0 +1,124 @@
+
+[STEP] Godot version check
+4.6.stable.official.89cea1439
+
+[STEP] Headless boot check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+
+[STEP] Full match flow check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_FULL_MATCH_FLOW_OK
+FLOW:SELECT->FIGHT->RESULT->REMATCH
+TOKEN_OK:QA_FULL_MATCH_FLOW_OK
+TOKEN_OK:FLOW:SELECT->FIGHT->RESULT->REMATCH
+
+[STEP] Rematch reset check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_REMATCH_RESET_OK
+HP_RESET:true
+INPUT_BUFFER_CLEARED:true
+TOKEN_OK:QA_REMATCH_RESET_OK
+TOKEN_OK:HP_RESET:true
+TOKEN_OK:INPUT_BUFFER_CLEARED:true
+
+[STEP] Regression suite check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_REGRESSION_OK
+EDGE_CASES:4/4
+TOKEN_OK:QA_REGRESSION_OK
+TOKEN_OK:EDGE_CASES:4/4
+
+[STEP] Core test runner check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+TESTS_ALL_PASS
+TOKEN_OK:TESTS_ALL_PASS
+
+[STEP] Phase-1 visual contract check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+HUD_THEME_PROFILE:ANIME_ARENA
+REQUIRED_NODES_PRESENT:true
+FIGHTER_VISUALS_BOUND:true
+STAGE_ATMOSPHERE_ACTIVE:true
+ROUND_TRANSITION_STYLE_OK
+QA_PHASE1_VISUAL_CONTRACT_OK
+TOKEN_OK:HUD_THEME_PROFILE:ANIME_ARENA
+TOKEN_OK:REQUIRED_NODES_PRESENT:true
+TOKEN_OK:FIGHTER_VISUALS_BOUND:true
+TOKEN_OK:STAGE_ATMOSPHERE_ACTIVE:true
+TOKEN_OK:ROUND_TRANSITION_STYLE_OK
+TOKEN_OK:QA_PHASE1_VISUAL_CONTRACT_OK
+
+[STEP] Phase-1 asset license check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+UNLICENSED_ASSETS:0
+FORBIDDEN_OFFICIAL_ASSETS:0
+QA_ASSET_LICENSE_OK
+TOKEN_OK:UNLICENSED_ASSETS:0
+TOKEN_OK:FORBIDDEN_OFFICIAL_ASSETS:0
+TOKEN_OK:QA_ASSET_LICENSE_OK
+
+[STEP] Phase-1 placeholder visuals check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+LEGACY_PLACEHOLDER_REFERENCES:0
+FIGHTER_VISUAL_BINDINGS_OK:true
+QA_PLACEHOLDER_VISUALS_REMOVED_OK
+TOKEN_OK:LEGACY_PLACEHOLDER_REFERENCES:0
+TOKEN_OK:FIGHTER_VISUAL_BINDINGS_OK:true
+TOKEN_OK:QA_PLACEHOLDER_VISUALS_REMOVED_OK
+
+[STEP] Phase-1 hit feedback check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_HIT_FEEDBACK_OK
+HIT_TO_VFX_RATIO:1.00
+TOKEN_OK:QA_HIT_FEEDBACK_OK
+TOKEN_OK:HIT_TO_VFX_RATIO:1.00
+
+[STEP] Phase-1 rematch visual reset check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_REMATCH_VISUAL_RESET_OK
+ACTIVE_VFX_NODES_AFTER_RESET:0
+TOKEN_OK:QA_REMATCH_VISUAL_RESET_OK
+TOKEN_OK:ACTIVE_VFX_NODES_AFTER_RESET:0
+
+[STEP] Phase-1 rematch transition race guard check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+KO_STALE_BLOCKED:true
+TIMEUP_STALE_BLOCKED:true
+QA_REMATCH_TRANSITION_RACE_GUARD_OK
+TOKEN_OK:KO_STALE_BLOCKED:true
+TOKEN_OK:TIMEUP_STALE_BLOCKED:true
+TOKEN_OK:QA_REMATCH_TRANSITION_RACE_GUARD_OK
+
+[STEP] Phase-1 hit-stop scale stability check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_HIT_STOP_SCALE_STABILITY_OK
+TOKEN_OK:QA_HIT_STOP_SCALE_STABILITY_OK
+
+[STEP] Phase-1 layout metrics scaling check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_LAYOUT_METRICS_SCALING_OK
+TOKEN_OK:QA_LAYOUT_METRICS_SCALING_OK
+
+[STEP] Private prototype guard check
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+QA_PRIVATE_GUARD_OK
+PUBLIC_RELEASE_STEPS_PRESENT:false
+TOKEN_OK:QA_PRIVATE_GUARD_OK
+TOKEN_OK:PUBLIC_RELEASE_STEPS_PRESENT:false
+
+DEMO_CHECKLIST_PASS
+Verification finished.
